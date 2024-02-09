@@ -1,5 +1,5 @@
 paho_mqtt==1.6.1
-pycryptodomex==3.18
+pycryptodomex==3.19.1
 rich==13.3.5
 requests==2.31.0
 click==8.1.3
