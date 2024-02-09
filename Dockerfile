@@ -1,5 +1,5 @@
 # First stage: build environment
-FROM python:3.11-bullseye AS build-env
+FROM python:3.12-bullseye AS build-env
 
 COPY .docker-os-detect /tmp/docker-os-detect
 RUN sh /tmp/docker-os-detect
@@ -18,7 +18,7 @@ RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Second stage: runtime environment
-FROM python:3.11-slim
+FROM python:3.12-alpine
 
 # Set the working directory to /app
 WORKDIR /app
@@ -34,7 +34,7 @@ COPY libflagship /app/libflagship/
 COPY cli /app/cli/
 
 # Copy the installed dependencies from the build environment
-COPY --from=build-env /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=build-env /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
 
 STOPSIGNAL SIGINT
 
